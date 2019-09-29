@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+    
+    return;
+}

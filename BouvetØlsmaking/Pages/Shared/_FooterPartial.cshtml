@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+@using BouvetØlsmaking.Models
+
+@*<div class="row justify-content-center">*@
+<div class="row container-fluid justify-content-center">
+    @if(SessionHelper.Instance().IsLoggedIn())
+    {
+        <i>Logged in as @SessionHelper.Instance().GetTaster().DisplayName</i>
+    }
+    else
+    {
+        <i>Not logged in</i>
+    }
+</div>
+

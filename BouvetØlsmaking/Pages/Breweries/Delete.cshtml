@@ -1,0 +1,41 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Breweries.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Brewery</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brewery.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brewery.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brewery.Website)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brewery.Website)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Brewery.BreweryId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

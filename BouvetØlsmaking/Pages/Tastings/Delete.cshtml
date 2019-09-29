@@ -1,0 +1,49 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tastings.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tasting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.IsActive)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Tasting.TastingId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

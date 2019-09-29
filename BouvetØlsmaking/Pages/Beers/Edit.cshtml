@@ -1,0 +1,58 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Beers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Edit</h2>
+
+<h4>Beer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Beer.BeerId" />
+            <div class="form-group">
+                <label asp-for="Beer.BreweryId" class="control-label"></label>
+                <input asp-for="Beer.BreweryId" class="form-control" />
+                <span asp-validation-for="Beer.BreweryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.Name" class="control-label"></label>
+                <input asp-for="Beer.Name" class="form-control" />
+                <span asp-validation-for="Beer.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.ABV" class="control-label"></label>
+                <input asp-for="Beer.ABV" class="form-control" />
+                <span asp-validation-for="Beer.ABV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.BeerStyleId" class="control-label"></label>
+                <select asp-for="Beer.BeerStyleId" class="form-control"></select>
+                <span asp-validation-for="Beer.BeerStyleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.RateBeerLink" class="control-label"></label>
+                <input asp-for="Beer.RateBeerLink" class="form-control" />
+                <span asp-validation-for="Beer.RateBeerLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

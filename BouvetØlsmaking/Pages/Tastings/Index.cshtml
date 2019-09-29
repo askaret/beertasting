@@ -1,0 +1,78 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tastings.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+
+<h2>Index</h2>
+
+@if (TempData["Calculate"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Calculate"]
+    </div>
+    return;
+}
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].IsBlind)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tasting)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsBlind)
+                </td>
+                <td>
+                    <form asp-page-handler="Calculate" asp-route-id="@item.TastingId" method="post">
+                        <button type="submit" class="btn btn-sm btn-success d-none d-md-inline-block">
+                            Calculate
+                        </button>
+                    </form>
+                    &nbsp;
+                    <a asp-page="./Edit" asp-route-id="@item.TastingId">Edit</a> |
+                    <a asp-page="./TastingBeers" asp-route-id="@item.TastingId">Beers</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.TastingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

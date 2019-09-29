@@ -1,0 +1,36 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Facts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RandomFact[0].FactText)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RandomFact) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FactText)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RandomFactId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RandomFactId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RandomFactId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

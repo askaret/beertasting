@@ -1,0 +1,59 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Beers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Beer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Beer.BreweryId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Beer.BreweryId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Beer.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Beer.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Beer.ABV)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Beer.ABV)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Beer.BeerStyleId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Beer.BeerStyleId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Beer.RateBeerLink)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Beer.RateBeerLink)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Beer.BeerId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

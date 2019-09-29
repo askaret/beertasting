@@ -1,0 +1,104 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tastings.TastingBeersModel
+@{
+    ViewData["Title"] = "TastingBeers";
+}
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+
+<h2>Configure @Model.SelectedTasting.Name</h2>
+
+<h3>Beers in the tasting</h3>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Beer
+                </th>
+                <th>
+                    ABV %
+                </th>
+                <th>
+                    Brewery
+                </th>
+                <th>
+                    Style
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Beers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SortOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beer.ABV)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beer.Brewery.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beer.Beerstyle.Name)
+                    </td>
+                    <td>
+                        <div class="row">
+
+                            <div class="col-xs-1">
+                                <form asp-page-handler="MoveUp" asp-route-id="@item.TastingBeerId" method="post">
+                                    <button type="submit" class="btn btn-sm btn-toolbar d-none d-md-inline-block">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-xs-1">
+                                <form asp-page-handler="MoveDown" asp-route-id="@item.TastingBeerId" method="post">
+                                    <button type="submit" class="btn btn-sm btn-success d-none d-md-inline-block">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-xs-1">
+                                <form asp-page-handler="Delete" asp-route-id="@item.TastingBeerId" method="post">
+                                    <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-xs-1">
+        <a class="btn btn-info btn-sm d-md-inline-block" role="button" asp-page="./Index" asp-route-id="@Model.SelectedTasting.TastingId">Back</a>
+    </div>
+    <div class="col-xs-1">
+        &nbsp;
+    </div>
+    <div class="col-xs-1">
+        <a class="btn btn-info btn-sm d-md-inline-block" role="button" asp-page="./TastingBeersAdd" asp-route-id="@Model.SelectedTasting.TastingId">Add beer</a>
+    </div>
+</div>

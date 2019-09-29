@@ -1,0 +1,297 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tastings.ResultModel
+@{
+    ViewData["Title"] = "Result";
+}
+
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+
+@if (TempData["EmailSent"] != null)
+{
+    <div class="alert alert-success">
+        E-mail has been sent
+    </div>
+
+    return;
+}
+<h2>Results for @Model.CurrentTastingName</h2>
+
+<div class="row justify-content-center">
+    <div class="col-xs1">
+        <a class="btn btn-info btn-sm d-md-inline-block" data-toggle="collapse" href="#regularbeers" role="button" aria-expanded="false" aria-controls="regularbeers">
+            Regular beers
+        </a>
+        &nbsp;
+    </div>
+
+    <div class="col-xs1">
+        <a class="btn btn-info btn-sm d-md-inline-block" data-toggle="collapse" href="#homebrewbeers" role="button" aria-expanded="false" aria-controls="homebrewbeers">
+            Homebrew
+        </a>
+        &nbsp;
+    </div>
+    <div class="col-xs1">
+        <a class="btn btn-info btn-sm d-md-inline-block" data-toggle="collapse" href="#highabv" role="button" aria-expanded="false" aria-controls="highabv">
+            High ABV beers
+        </a>
+        &nbsp;
+    </div>
+    <div class="col-xs1">
+        <a class="btn btn-info btn-sm d-md-inline-block" data-toggle="collapse" href="#allbears" role="button" aria-expanded="false" aria-controls="allbears">
+            All beers
+        </a>
+        &nbsp;
+    </div>
+    <div class="col-xs1">
+        <form asp-page-handler="EmailResults" asp-route-tastingid="@Model.CurrentTastingId" method="post">
+            <button type="submit" class="btn btn-success btn-sm d-md-inline-block">
+                E-mail results
+            </button>
+        </form>
+    </div>
+</div>
+<p></p>
+<div class="collapse border-warning" id="regularbeers">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>Regular beer</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Beer</th>
+                    <th scope="col">ABV</th>
+                    <th scope="col">Brewery</th>
+                    <th scope="col">Taste</th>
+                    <th scope="col">Appearance</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ResultRegular.Count; i++)
+                {
+                    var res = Model.ResultRegular[i];
+
+                    <tr>
+                        <td>@(i + 1)</td>
+                        @if (string.IsNullOrEmpty(res.RateBeerUrl))
+                        {
+                            <td>@res.BeerName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.RateBeerUrl" target="_blank">@res.BeerName</a></td>
+                        }
+
+                        <td>@res.Abv</td>
+                        @if (string.IsNullOrEmpty(res.BreweryUrl))
+                        {
+                            <td>@res.BreweryName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.BreweryUrl" target="_blank">@res.BreweryName</a></td>
+                        }
+                        <td>@res.ScoreTaste</td>
+                        <td>@res.ScoreAppearance</td>
+                        <td>@res.ScoreOverall</td>
+                        <td>@res.ScoreFinal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse border-warning" id="homebrewbeers">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>Homebrew</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Beer</th>
+                    <th scope="col">ABV</th>
+                    <th scope="col">Brewery</th>
+                    <th scope="col">Taste</th>
+                    <th scope="col">Appearance</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ResultHomebrew.Count; i++)
+                {
+                    var res = Model.ResultHomebrew[i];
+
+                    <tr>
+                        <td>@(i + 1)</td>
+                        @if (string.IsNullOrEmpty(res.RateBeerUrl))
+                        {
+                            <td>@res.BeerName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.RateBeerUrl" target="_blank">@res.BeerName</a></td>
+                        }
+
+                        <td>@res.Abv</td>
+                        @if (string.IsNullOrEmpty(res.BreweryUrl))
+                        {
+                            <td>@res.BreweryName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.BreweryUrl" target="_blank">@res.BreweryName</a></td>
+                        }
+                        <td>@res.ScoreTaste</td>
+                        <td>@res.ScoreAppearance</td>
+                        <td>@res.ScoreOverall</td>
+                        <td>@res.ScoreFinal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse border-warning" id="highabv">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>High ABV</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Beer</th>
+                    <th scope="col">ABV</th>
+                    <th scope="col">Brewery</th>
+                    <th scope="col">Taste</th>
+                    <th scope="col">Appearance</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ResultHighAbv.Count; i++)
+                {
+                    var res = Model.ResultHighAbv[i];
+
+                    <tr>
+                        <td>@(i + 1)</td>
+                        @if (string.IsNullOrEmpty(res.RateBeerUrl))
+                        {
+                            <td>@res.BeerName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.RateBeerUrl" target="_blank">@res.BeerName</a></td>
+                        }
+
+                        <td>@res.Abv</td>
+                        @if (string.IsNullOrEmpty(res.BreweryUrl))
+                        {
+                            <td>@res.BreweryName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.BreweryUrl" target="_blank">@res.BreweryName</a></td>
+                        }
+                        <td>@res.ScoreTaste</td>
+                        <td>@res.ScoreAppearance</td>
+                        <td>@res.ScoreOverall</td>
+                        <td>@res.ScoreFinal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="collapse border-warning" id="allbears">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>All beers</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Beer</th>
+                    <th scope="col">ABV</th>
+                    <th scope="col">Brewery</th>
+                    <th scope="col">Taste</th>
+                    <th scope="col">Appearance</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ResultAll.Count; i++)
+                {
+                    var res = Model.ResultAll[i];
+
+                    <tr>
+                        <td>@(i + 1)</td>
+                        @if (string.IsNullOrEmpty(res.RateBeerUrl))
+                        {
+                            <td>@res.BeerName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.RateBeerUrl" target="_blank">@res.BeerName</a></td>
+                        }
+
+                        <td>@res.Abv</td>
+                        @if (string.IsNullOrEmpty(res.BreweryUrl))
+                        {
+                            <td>@res.BreweryName</td>
+                        }
+                        else
+                        {
+                            <td><a href="@res.BreweryUrl" target="_blank">@res.BreweryName</a></td>
+                        }
+                        <td>@res.ScoreTaste</td>
+                        <td>@res.ScoreAppearance</td>
+                        <td>@res.ScoreOverall</td>
+                        <td>@res.ScoreFinal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*<div class="collapse" id="regularbeers">
+        <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+    </div>*@

@@ -1,0 +1,51 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tastings.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Details</h2>
+
+<div>
+    <h4>Tasting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.TastingDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.TastingDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasting.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tasting.IsBlind)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Tasting.TastingId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

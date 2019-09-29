@@ -1,0 +1,59 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Beers.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Create</h2>
+
+<h4>Beer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SelectedBrewery" class="control-label"></label>
+                <select asp-for="Beer.BreweryId" asp-items="@(new SelectList(Model.Breweries, "BreweryId", "Name", Model.SelectedBrewery))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.Name" class="control-label"></label>
+                <input asp-for="Beer.Name" class="form-control" />
+                <span asp-validation-for="Beer.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.ABV" class="control-label"></label>
+                <input asp-for="Beer.ABV" class="form-control" />
+                <span asp-validation-for="Beer.ABV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedBeerstyle" class="control-label">Style</label>
+                <select asp-for="Beer.BeerStyleId" asp-items="@(new SelectList(Model.BeerStyles, "BeerstyleId", "Name", Model.SelectedBeerstyle))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedBeerclass" class="control-label">Style</label>
+                <select asp-for="Beer.BeerClassId" asp-items="@(new SelectList(Model.Beerclasses, "BeerClassId", "Name", Model.SelectedBeerclass))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beer.RateBeerLink" class="control-label"></label>
+                <input asp-for="Beer.RateBeerLink" class="form-control" />
+                <span asp-validation-for="Beer.RateBeerLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>

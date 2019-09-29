@@ -1,0 +1,125 @@
+﻿@page
+@model BouvetØlsmaking.Pages.VoteModel
+@{
+    ViewData["Title"] = "Vote";
+}
+
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+
+<form action="" method="post">
+    <h2>@Model.CurrentTasting.Name</h2>
+    <div class="card border-warning">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    @Model.CurrentBeer.Name
+                </div>
+                <div class="col-xs-1">@(Model.BeerNumber + 1) / @Model.CurrentTasting.TastingBeers.Count</div>
+            </div>
+        </div>
+        @if (Model.CurrentTasting.IsBlind == false)
+        {
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td><strong>ABV</strong></td>
+                            <td>@Model.CurrentBeer.ABV %</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brewery</strong></td>
+                            <td>@Model.CurrentBrewery.Name (@Model.CurrentBrewery.Country)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Style</strong></td>
+                            <td>@Model.CurrentStyle.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ratebeer</strong></td>
+                            <td><a href=@Model.CurrentBeer.RateBeerLink target="_blank">Link</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    <br />
+    <div class="card border-warning">
+        <div class="card-header">
+            My vote
+        </div>
+        <div class="card-body ">
+
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td><strong>Appearance</strong></td>
+                        <td>
+                            <input asp-for="@Model.CurrentVote.Appearance" min="0.0" max="10.0" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Taste</strong></td>
+                        <td>
+                            <input asp-for="@Model.CurrentVote.Taste" min="0.0" max="10.0" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Overall</strong></td>
+                        <td>
+                            <input asp-for="@Model.CurrentVote.Overall" min="0.0" max="10.0" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Note</strong></td>
+                        <td>
+                            <input asp-for="@Model.CurrentVote.Note" class="form-control" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <input asp-for="@Model.CurrentVote.BeerId" type="hidden" class="form-control" />
+            <input asp-for="@Model.CurrentVote.TasterId" type="hidden" class="form-control" />
+            <input asp-for="@Model.CurrentVote.TastingId" type="hidden" class="form-control" />
+            <input asp-for="@Model.CurrentVote.VoteId" type="hidden" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="card border-warning">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-xs-2">
+                    @if (Model.CanGoBack)
+                    {
+                        <div class="form-group">
+                            <input type="submit" asp-page-handler="MovePrevious" value="Back" asp-route-beerNumber="@Model.BeerNumber" class="btn btn-info btn-sm d-md-inline-block" />
+                            &nbsp;
+                        </div>
+                    }
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <input type="submit" asp-page-handler="SaveVote" value="Save" asp-route-beerNumber="@Model.BeerNumber" class="btn btn-success btn-sm d-md-inline-block" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    @if (Model.CanGoForward)
+                    {
+                        <div class="form-group">
+                            &nbsp;
+                            <input type="submit" asp-page-handler="MoveNext" value="Next" asp-route-beerNumber="@Model.BeerNumber" class="btn btn-info btn-sm d-md-inline-block" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

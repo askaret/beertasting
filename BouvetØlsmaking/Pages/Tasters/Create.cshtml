@@ -1,0 +1,47 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tasters.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Create</h2>
+
+<h4>Taster</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Taster.EmailAddress" class="control-label"></label>
+                <input asp-for="Taster.EmailAddress" class="form-control" />
+                <span asp-validation-for="Taster.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taster.DisplayName" class="control-label"></label>
+                <input asp-for="Taster.DisplayName" class="form-control" />
+                <span asp-validation-for="Taster.DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taster.Password" class="control-label"></label>
+                <input asp-for="Taster.Password" class="form-control" />
+                <span asp-validation-for="Taster.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>

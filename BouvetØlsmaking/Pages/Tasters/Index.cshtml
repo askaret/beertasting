@@ -1,0 +1,56 @@
+﻿@page
+@model BouvetØlsmaking.Pages.Tasters.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["CustomError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CustomError"]
+    </div>
+
+    return;
+}
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Taster[0].EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taster[0].DisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taster[0].IsAdmin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Taster)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.TasterId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.TasterId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.TasterId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

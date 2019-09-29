@@ -1,0 +1,103 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using BouvetØlsmaking.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row justify-content-center">
+    @if (Model.CurrentTaster.IsLoggedIn)
+    {
+        <div class="col-xs-1">
+            <form asp-page-handler="Logout" method="post">
+                <button type="submit" class="btn btn-info btn-sm d-md-inline-block">
+                    Logout
+                </button>
+            </form>
+        </div>
+        @if (Model.CurrentTaster.IsAdmin)
+        {
+            <div class="col-xs-1">
+                <a class="btn btn-danger btn-sm d-md-inline-block" role="button" asp-page="Admin">Admin</a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-xs-1">
+            <a class="btn btn-info btn-sm d-md-inline-block" role="button" asp-page="./Login" asp-route-id="">Login</a>
+        </div>
+        <div class="col-xs-1">
+            &nbsp;
+        </div>
+        <div class="col-xs-1">
+            <a class="btn btn-info btn-sm d-md-inline-block" role="button" asp-page="./Register">Register</a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasting[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tasting)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <div class="row">
+                        @if (item.IsActive && Model.CurrentTaster.IsLoggedIn)
+                        {
+                            if (item.TastingDate.Date <= DateTime.Now.Date)
+                            {
+                                <div class="col-xs-1">
+                                    <a class="btn btn-success btn-sm d-md-inline-block" role="button" asp-page="./Vote" asp-route-id="@item.TastingId" asp-route-beernumber="0">Vote</a>
+                                </div>
+
+                                @if (Model.CurrentTaster.IsAdmin)
+                                {
+                                    <div class="col-xs-1">&nbsp;</div>
+                                    <div class="col-xs-1">
+                                        <a class="btn btn-warning btn-sm d-md-inline-block" role="button" asp-page="./Tastings/Live" asp-route-id="@item.TastingId">Live</a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-xs-1">
+                                    Starts @item.TastingDate.ToString("dd/MM/yyyy")
+                                </div>
+                            }
+                        }
+                        else if (!item.IsActive && Model.CurrentTaster.IsLoggedIn)
+                        {
+                            <div class="col-xs-1">
+                                <a class="btn btn-info btn-sm d-md-inline-block" role="button" asp-page="./Tastings/Result" asp-route-id="@item.TastingId" asp-route-pageid="1">Results</a>
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
