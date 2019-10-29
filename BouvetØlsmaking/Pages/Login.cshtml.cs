@@ -52,6 +52,7 @@ namespace BouvetØlsmaking.Pages
             
             if(taster != null)
             {
+                TempData["CustomError"] = null;
                 SessionHelper.Instance().SaveTaster(taster);
                 return RedirectToPage("./Index");
             }

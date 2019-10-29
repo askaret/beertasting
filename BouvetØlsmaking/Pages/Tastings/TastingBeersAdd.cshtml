@@ -18,35 +18,34 @@
 <h3>Available beers</h3>
 
 <div class="row">
-    <form method="post">
-        <table class="table">
-            <thead>
-                <tr>
-                    @*<th>Selected</th>*@
-                    <th>
-                        Beer
-                    </th>
-                    <th>
-                        ABV %
-                    </th>
-                    <th>
-                        Brewery
-                    </th>
-                    <th>
-                        Style
-                    </th>
-                    <th>
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th>Selected</th>*@
+                <th>
+                    Beer
+                </th>
+                <th>
+                    ABV %
+                </th>
+                <th>
+                    Brewery
+                </th>
+                <th>
+                    Style
+                </th>
+                <th>
 
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var selectableBeer in Model.SelectableBeers)
-                {
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var selectableBeer in Model.SelectableBeers)
+            {
                 <tr>
                     @*<td>
-                        <input asp-for="@selectableBeer.IsSelected" class="form-control" />
-                    </td>*@
+                            <input asp-for="@selectableBeer.IsSelected" class="form-control" />
+                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => selectableBeer.Value1)
                     </td>
@@ -61,8 +60,9 @@
                     </td>
                     <td>
                         <div class="row">
+
                             <div class="col-xs-1">
-                                <form asp-page-handler="AddBeer" asp-route-id="@selectableBeer.Id" method="post">
+                                <form asp-page-handler="AddBeer" asp-route-id="@selectableBeer.Id" asp-route-tastingId="@Model.SelectedTasting.TastingId" method="post">
                                     <button type="submit" class="btn btn-sm btn-success d-none d-md-inline-block">
                                         <i class="fas fa-arrow-down"></i>
                                     </button>
@@ -71,10 +71,9 @@
                         </div>
                     </td>
                 </tr>
-                }
-            </tbody>
-        </table>
-    </form>
+            }
+        </tbody>
+    </table>
 </div>
 <div class="row">
     <div class="col-xs-1">

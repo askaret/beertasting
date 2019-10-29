@@ -24,6 +24,14 @@
                 <input type="submit" value="Login" class="btn btn-info btn-sm d-md-inline-block" />
                 <a href="ForgotPassword">Forgotten password?</a>
             </div>
+            @if (TempData["CustomError"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["CustomError"]
+                </div>
+
+                return;
+            }
         </form>
     </div>
 </div>
