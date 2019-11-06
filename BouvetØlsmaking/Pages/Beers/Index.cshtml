@@ -27,6 +27,12 @@
                 @Html.DisplayNameFor(model => model.Beer[0].ABV)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Beer[0].BreweryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beer[0].BeerClassId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Beer[0].BeerStyleId)
             </th>
             <th>
@@ -38,25 +44,31 @@
     <tbody>
         @foreach (var item in Model.Beer)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ABV)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BeerStyleId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RateBeerLink)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.BeerId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.BeerId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.BeerId">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BreweryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeerClassId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeerStyleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateBeerLink)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.BeerId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.BeerId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.BeerId">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

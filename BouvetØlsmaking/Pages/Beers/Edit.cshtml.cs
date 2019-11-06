@@ -12,13 +12,28 @@ namespace BouvetØlsmaking.Pages.Beers
 {
     public class EditModel : BeerPageModel
     {
-        public EditModel(TastingContext context) : base(context)
-        {
-
-        }
+        public List<Brewery> Breweries { get; set; }
+        public List<Beerstyle> BeerStyles { get; set; }
+        public List<BeerClass> Beerclasses { get; set; }
 
         [BindProperty]
         public Beer Beer { get; set; }
+
+        [BindProperty]
+        public Brewery SelectedBrewery { get; set; }
+
+        [BindProperty]
+        public BeerClass SelectedBeerclass { get; set; }
+
+        [BindProperty]
+        public Beerstyle SelectedBeerstyle { get; set; }
+
+        public EditModel(TastingContext context) : base(context)
+        {
+            BeerStyles = _context.Beerstyle.OrderBy(x => x.Name).ToList();
+            Beerclasses = _context.Beerclass.OrderBy(x => x.Name).ToList();
+            Breweries = _context.Brewery.OrderBy(x => x.Name).ToList();
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
