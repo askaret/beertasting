@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 namespace BouvetØlsmaking.Pages.Beers
 {
     public class CreateModel : BeerPageModel
-    {   
+    {
+        [BindProperty]
         public List<Brewery> Breweries{ get; set; }
+        [BindProperty]
         public List<Beerstyle> BeerStyles { get; set; }
+        [BindProperty]
         public List <BeerClass> Beerclasses { get; set; }
         [BindProperty]
         public Beerstyle SelectedBeerstyle { get; set; }
-
         [BindProperty]
         public BeerClass SelectedBeerclass { get; set; }
-
         [BindProperty]
         public Brewery SelectedBrewery { get; set; }
+
         public CreateModel(TastingContext context) : base(context)
         {
 
@@ -32,7 +34,9 @@ namespace BouvetØlsmaking.Pages.Beers
             BeerStyles = _context.Beerstyle.OrderBy(x => x.Name).ToList();
             Beerclasses = _context.Beerclass.OrderBy(x => x.Name).ToList();
             Breweries = _context.Brewery.OrderBy(x => x.Name).ToList();
-
+            SelectedBeerclass = Beerclasses.FirstOrDefault();
+            SelectedBeerstyle = BeerStyles.FirstOrDefault();
+            SelectedBrewery = Breweries.FirstOrDefault();
             
             return Page();
         }
