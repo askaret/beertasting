@@ -33,7 +33,7 @@ namespace BouvetØlsmaking.Pages.Tastings
             var avgAppearance = Math.Round(votes.Average(x => x.Appearance), 2);
             var avgOverall = Math.Round(votes.Average(x => x.Overall), 2);
 
-            var retString = $"{numVotes} vote(s) cast so far  [Taste: {avgTaste} - Appearance: {avgAppearance} - Overall: {avgOverall}]";
+            var retString = $"{numVotes} vote(s) cast so far  [Avg. taste: {avgTaste} - Avg. appearance: {avgAppearance} - Avg. overall: {avgOverall}]";
 
             return new JsonResult(retString);
         }
